@@ -229,7 +229,7 @@ commandEncoder.endEncoding()
 最重要的部分是==drawPrimitives(type:vertexStart:vertexCount:instanceCount:)== ，告诉GPU基于顶点缓冲区绘制一系列三角形，每个三角形包含三个顶点，从顶点缓冲区0开始，本列中只有一个三角形。<br/>
 命令配置完成，调用==endEncoding()==
 
-<br/>
+&ensp;
 #### 5. 提交 指令缓冲区
 最后一步，提交命令缓冲区<br/>
 在上述的==render()==方法中添加：
