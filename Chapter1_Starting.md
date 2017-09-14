@@ -3,7 +3,7 @@
 
 &ensp;
 本例通过一个简单的Xcode工程详细介绍以上过程。首先，你需要创建一个简单的iOS project，本系列教程选择使用swift。
-&ensp;
+&ensp;&emsp;
 准备工作：
 * Xcode 8 以上
 * iOS 8 以上的真机设备
@@ -58,7 +58,8 @@ Metal使用标准坐标系，意味着设备屏幕就是一个长宽高(x,y,z)�
 
 具体代码：
 a. 添加三角形顶点数据
-```let vertexData: [Float] = [
+```
+let vertexData: [Float] = [
         0.0, 1.0, 0.0, //
         -1.0, -1.0, 0.0,
         1.0, -1.0, 0.0
@@ -70,7 +71,8 @@ b. 添加顶点缓冲区
 `var vertexBuffer: MTLBuffer!`
 &ensp;
 c. 初始化缓冲区，在 ==viewDidLoad()==中添加
-```let bufferSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
+```
+let bufferSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
         vertexBuffer = device.makeBuffer(bytes: vertexData, length: bufferSize, options: [])
 ```
 &ensp;
