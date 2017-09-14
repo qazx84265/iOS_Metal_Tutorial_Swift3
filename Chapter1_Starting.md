@@ -23,9 +23,9 @@
 &ensp;
 #### 1. 创建一个MTLDevice
 MTLDevice是对设备GPU的引用，可以用来创建所有需要的Metal对象（指令队列、缓冲区、纹理等）。
-<br />具体代码：<br />
-a. 打开project中的 ==ViewController.swift== ，在文件头部引入Metal框架<br />
-`import Metal`<br />
+<br />具体代码：<br/>
+a. 打开project中的 ==ViewController.swift== ，在文件头部引入Metal框架<br/>
+`import Metal`<br/>
 &ensp;
 b. 在 ==ViewController== 类中添加device属性<br />
 `var device: MTLDevice!`<br />
