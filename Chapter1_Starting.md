@@ -22,19 +22,16 @@
 7. 创建一个指令队列（Command Queue）
 &ensp;
 #### 1. 创建一个MTLDevice
-MTLDevice是对设备GPU的引用，可以用来创建所有需要的Metal对象（指令队列、缓冲区、纹理等）。
-<br />具体代码：<br/>
+MTLDevice是对设备GPU的引用，可以用来创建所有需要的Metal对象（指令队列、缓冲区、纹理等）。<br/>
+具体代码：<br/>
 a. 打开project中的 ==ViewController.swift== ，在文件头部引入Metal框架<br/>
-`import Metal`<br/>
-&ensp;
+`import Metal`<br/><br/>
 b. 在 ==ViewController== 类中添加device属性<br />
 `var device: MTLDevice!`<br />
-这里声明为option类型，是因为实在 ==viewDidLoad()== 中而不是 init中初始化。另外由于我们确切的知道在使用之前能够初始化，所有使用!来隐式解包方便使用。<br />
-&ensp;
+这里声明为option类型，是因为实在 ==viewDidLoad()== 中而不是 init中初始化。另外由于我们确切的知道在使用之前能够初始化，所有使用!来隐式解包方便使用。<br /><br/>
 c. 在 ==viewDidLoad()==中添加<br />
 `device = MTLCreateSystemDefaultDevice()`<br />
-返回设备上默认的GPU引用。<br />
-&ensp;
+返回设备上默认的GPU引用。<br /><br/>
 #### 2. 创建一个CAMetalLayer
 在iOS中，你所看见的任何东西都是绘制在 ==CALayer==上，同样的，如果你想使用Metal在屏幕上绘制任何东西，就需要使用 ==CALayer==的子类 ==CAMetalLayer==。
 具体代码：
