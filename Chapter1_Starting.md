@@ -3,8 +3,8 @@
 
 &ensp;
 本例通过一个简单的Xcode工程详细介绍以上过程。首先，你需要创建一个简单的iOS project，本系列教程选择使用swift。
-&ensp;&emsp;
-准备工作：
+
+<br />准备工作：
 * Xcode 8 以上
 * iOS 8 以上的真机设备
 * Swift
@@ -12,7 +12,7 @@
 
 ## Metal设置
 
-本节内容将通过绘制一个简单的三角形的栗子来介绍Metal的具体使用步骤。
+本节内容将通过绘制一个简单的三角形的栗子来介绍Metal的具体使用步骤。<br/>
 在渲染之前需要通过以下7个步骤来设置Metal：
 1. 创建一个MTLDevice
 2. 创建一个CAMetalLayer
@@ -33,7 +33,7 @@ b. 在 ==ViewController== 类中添加device属性
 这里声明为option类型，是因为实在 ==viewDidLoad()== 中而不是 init中初始化。另外由于我们确切的知道在使用之前能够初始化，所有使用!来隐式解包方便使用。
 &ensp;
 c. 在 ==viewDidLoad()==中添加
-```device = MTLCreateSystemDefaultDevice()```
+`device = MTLCreateSystemDefaultDevice()`
 返回设备上默认的GPU引用。
 &ensp;
 #### 2. 创建一个CAMetalLayer
