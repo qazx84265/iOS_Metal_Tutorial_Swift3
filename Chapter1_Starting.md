@@ -82,7 +82,8 @@ Talk is cheap，show me the code~<br/>
 新建着色器文件:<br/>
 xcode -> new file -> metal file -> shaders.metal<br/>
 定义顶点着色器：<br/>
-```vertex float4 basic_vertex(   // 1
+```
+vertex float4 basic_vertex(   // 1
     const device packed_float3* vertex_array [[ buffer(0) ]], // 2
     unsigned int vid [[ vertex_id ]]) { // 3
     return float4(vertex_array[vid], 1.0) // 4
@@ -107,13 +108,15 @@ line 4. 通过vertex_id在数组中查询顶点，然后将向量转为float4
 fragment half4 basic_fragment() { // 1
     return half4(1.0); // 2
 }```
+
 解释：
 line 1: 片元着色器必须以==fragment==开头，函数必须返回片元的颜色。<br/>
 line 2: 这里返回(1, , 1, 1)，表示白色
 <br/><br/>
+
 #### 6. 创建一个渲染管线
-现在，已经创建了顶点和片元着色器，需要将它们（同其他配置数据）组合到一个叫 ==渲染管线（render pipeline）== 特殊的对象中。
-Metal比较酷的一点是，着色器都会预编译，渲染管线会在第一次设置完成后编译，使得所有事情非常高效。
+现在，已经创建了顶点和片元着色器，需要将它们（同其他配置数据）组合到一个叫 ==渲染管线（render pipeline）== 特殊的对象中。<br/>
+Metal比较酷的一点是，着色器都会预编译，渲染管线会在第一次设置完成后编译，使得所有事情非常高效。<br/>
 具体代码：
 a. 添加管线属性
 `var renderPipelineState: MTLRenderPipelineState!`
