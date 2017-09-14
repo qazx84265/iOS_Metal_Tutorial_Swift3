@@ -2,9 +2,8 @@
 本文翻译自[ray wenderlich](https://www.raywenderlich.com)的Metal系列教程，[原文地址](https://www.raywenderlich.com/146414/metal-tutorial-swift-3-part-1-getting-started)。
 
 &ensp;
-本例通过一个简单的Xcode工程详细介绍以上过程。首先，你需要创建一个简单的iOS project，本系列教程选择使用swift。
-
-<br />准备工作：
+本例通过一个简单的Xcode工程详细介绍以上过程。首先，你需要创建一个简单的iOS project，本系列教程选择使用swift.<br />
+准备工作：
 * Xcode 8 以上
 * iOS 8 以上的真机设备
 * Swift
@@ -12,7 +11,7 @@
 
 ## Metal设置
 
-本节内容将通过绘制一个简单的三角形的栗子来介绍Metal的具体使用步骤。<br/>
+本节内容将通过绘制一个简单的三角形的栗子来介绍Metal的具体使用步骤。<br />
 在渲染之前需要通过以下7个步骤来设置Metal：
 1. 创建一个MTLDevice
 2. 创建一个CAMetalLayer
@@ -24,17 +23,17 @@
 &ensp;
 #### 1. 创建一个MTLDevice
 MTLDevice是对设备GPU的引用，可以用来创建所有需要的Metal对象（指令队列、缓冲区、纹理等）。
-具体代码：
-a. 打开project中的 ==ViewController.swift== ，在文件头部引入Metal框架
-`import Metal`
+<br />具体代码：<br />
+a. 打开project中的 ==ViewController.swift== ，在文件头部引入Metal框架<br />
+`import Metal`<br />
 &ensp;
-b. 在 ==ViewController== 类中添加device属性
-`var device: MTLDevice!`
-这里声明为option类型，是因为实在 ==viewDidLoad()== 中而不是 init中初始化。另外由于我们确切的知道在使用之前能够初始化，所有使用!来隐式解包方便使用。
+b. 在 ==ViewController== 类中添加device属性<br />
+`var device: MTLDevice!`<br />
+这里声明为option类型，是因为实在 ==viewDidLoad()== 中而不是 init中初始化。另外由于我们确切的知道在使用之前能够初始化，所有使用!来隐式解包方便使用。<br />
 &ensp;
-c. 在 ==viewDidLoad()==中添加
-`device = MTLCreateSystemDefaultDevice()`
-返回设备上默认的GPU引用。
+c. 在 ==viewDidLoad()==中添加<br />
+`device = MTLCreateSystemDefaultDevice()`<br />
+返回设备上默认的GPU引用。<br />
 &ensp;
 #### 2. 创建一个CAMetalLayer
 在iOS中，你所看见的任何东西都是绘制在 ==CALayer==上，同样的，如果你想使用Metal在屏幕上绘制任何东西，就需要使用 ==CALayer==的子类 ==CAMetalLayer==。
