@@ -35,7 +35,7 @@ c. 在 ==viewDidLoad()==中添加<br />
 #### 2. 创建一个CAMetalLayer
 在iOS中，你所看见的任何东西都是绘制在 ==CALayer==上，同样的，如果你想使用Metal在屏幕上绘制任何东西，就需要使用 ==CALayer==的子类 ==CAMetalLayer==。<br/>
 具体代码：<br/>
-a. 添加layer
+a. 添加layer<br/>
 `var metalLayer: CAMetalLayer!`<br/>
 b. 在 ==viewDidLoad()==中添加<br/>
 ```
@@ -46,13 +46,13 @@ metalLayer.framebufferOnly = true //
 metalLayer.frame = view.layer.frame
 view.layer.addSublayer(metalLayer)
 ```
-&ensp;
+<br/><br/>
 #### 3. 创建一个顶点缓冲区
-Metal中一切都是三角形，平面、3D图形都可以分解成一系列的三角形。
+Metal中一切都是三角形，平面、3D图形都可以分解成一系列的三角形。<br/>
 Metal使用标准坐标系，意味着设备屏幕就是一个长宽高(x,y,z)为2*2*1，中心点为(0,0,0.5)的立方体。假设z=0，那么(-1,-1,0)为左下角，(1,1,0)为右上角。如图所示：
 ![](./Md_resource/metal_triangle.jpg)
 
-具体代码：
+具体代码：<br/>
 a. 添加三角形顶点数据
 ```
 let vertexData: [Float] = [
@@ -61,17 +61,15 @@ let vertexData: [Float] = [
         1.0, -1.0, 0.0
     ]
 ```
-上述代码的数据是在CPU中创建了一个数组，需要通过 ==MTLBuffer== 将数组发送到GPU才能使用Metal进行处理
-&ensp;
-b. 添加顶点缓冲区
-`var vertexBuffer: MTLBuffer!`
-&ensp;
-c. 初始化缓冲区，在 ==viewDidLoad()==中添加
+上述代码的数据是在CPU中创建了一个数组，需要通过 ==MTLBuffer== 将数组发送到GPU才能使用Metal进行处理<br/>
+b. 添加顶点缓冲区<br/>
+`var vertexBuffer: MTLBuffer!`<br/>
+c. 初始化缓冲区，在 ==viewDidLoad()==中添加<br/>
 ```
 let bufferSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
-        vertexBuffer = device.makeBuffer(bytes: vertexData, length: bufferSize, options: [])
+vertexBuffer = device.makeBuffer(bytes: vertexData, length: bufferSize, options: [])
 ```
-&ensp;
+<br/><br/>
 #### 4. 创建一个顶点着色器
 着色器，简而言之，就是运行在GPU上的小程序，使用类似C++的==Metal Shading Language==编写，前面创建的顶点将作为着色器的输入。
 
@@ -80,21 +78,22 @@ let bufferSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
 本节内容为简单起见，着色器将原样返回输入顶点的位置。如图：
 ![](./Md_resource/metal_vertex_shader.jpg)
 
-Talk is cheap，show me the code~
-新建着色器文件，xcode -> new file -> shaders.metal
-定义顶点着色器：
+Talk is cheap，show me the code~<br/>
+新建着色器文件:<br/>
+xcode -> new file -> metal file -> shaders.metal<br/>
+定义顶点着色器：<br/>
 ```vertex float4 basic_vertex(   // 1
     const device packed_float3* vertex_array [[ buffer(0) ]], // 2
     unsigned int vid [[ vertex_id ]]) { // 3
     return float4(vertex_array[vid], 1.0) // 4
 }
 ```
-&ensp;
-代码解释：
+<br/>
+代码解释：<br/>
 line 1. 顶点着色器必须以关键字 ==vertex== 开头，函数必须返回顶点的最终位置，这里通过==float4==（4个float的向量），然后是着色器的名字，后续可以使用名字查找着色器。
-line 2. 第一个参数是一个指向顶点位置数组的指针。==[[ ... ]]==语法用来声明用于指定附加信息，比如资源位置、着色器输入、内置变量的属性。这里使用==[[ buffer(0) ]]==来表示这个参数将位于传递给着色器的第一个缓冲区中。
-line 3. vertex_id参数表示，被顶点数组的指定顶点填充。
-line 4. 通过vertex_id在数组中查询顶点，然后将向量转为float4
+line <br/>2. 第一个参数是一个指向顶点位置数组的指针。==[[ ... ]]==语法用来声明用于指定附加信息，比如资源位置、着色器输入、内置变量的属性。这里使用==[[ buffer(0) ]]==来表示这个参数将位于传递给着色器的第一个缓冲区中。
+line <br/>3. vertex_id参数表示，被顶点数组的指定顶点填充。
+line <br/>4. 通过vertex_id在数组中查询顶点，然后将向量转为float4
 &ensp;
 #### 5. 创建一个片元着色器
 片元着色器：屏幕上每个片元（像素）都会调用一次。着色器通过将顶点着色器的输出插入输入。
