@@ -107,7 +107,8 @@ line 4. 通过vertex_id在数组中查询顶点，然后将向量转为float4
 ```
 fragment half4 basic_fragment() { // 1
     return half4(1.0); // 2
-}```
+}
+```
 
 解释：
 line 1: 片元着色器必须以==fragment==开头，函数必须返回片元的颜色。<br/>
