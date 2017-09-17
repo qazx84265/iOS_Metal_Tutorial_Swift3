@@ -141,7 +141,6 @@ renderPipelineState = try! device.makeRenderPipelineState(descriptor: pipelineSt
 1. 通过==MTLLibrary==可以通过名字来获取访问工程中的任何预编译的着色器。
 2. 配置渲染管线，指定要使用的着色器，以及像素格式。
 3. 将配置编译到管线状态来更高效的使用
-
 &ensp;
 #### 7. 创建一个指令队列
 设置的最后一步需要创建一个==MTLCommandQueue==，这是一个告诉GPU依次执行的有序指令队列。<br/>
@@ -191,7 +190,6 @@ private func render() {
    }
 }
 ```
-
 &ensp;
 #### 2. 新建 Render Pass Descriptor
 ==MTLRenderPassDescriptor==对象用来配置要渲染的纹理、清除的颜色，以及其他的一些配置<br/>
@@ -205,18 +203,15 @@ renderPassDescriptor.colorAttachments[0].texture = drawable.texture
 renderPassDescriptor.colorAttachments[0].loadAction = .clear
 renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0.0, 104.0/255.0, 5.0/255.0, 1.0)
 ```
-
 &ensp;
 #### 3. 新建 指令缓冲区（Command Buffer）
 指令缓冲区可以认为是屏幕每帧要执行的一些列渲染命令，在提交之前，命令不会起任何作用。<br/>
 具体代码：在上述的==render()==方法中添加：<br/>
 `let commandBuffer = commandQueue.makeCommandBuffer()`
-
 &ensp;
 #### 4. 新建 Render Command Encoder
 Render Command Encoder用来创建具体的Render Command<br/>
 在上述的==render()==方法中添加：<br/>
-
 ```
 let commandEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
 commandEncoder.setRenderPipelineState(renderPipelineState)
@@ -226,7 +221,6 @@ commandEncoder.endEncoding()
 ```
 最重要的部分是==drawPrimitives(type:vertexStart:vertexCount:instanceCount:)== ，告诉GPU基于顶点缓冲区绘制一系列三角形，每个三角形包含三个顶点，从顶点缓冲区0开始，本列中只有一个三角形。<br/>
 命令配置完成，调用==endEncoding()==
-
 &ensp;
 #### 5. 提交 指令缓冲区
 最后一步，提交命令缓冲区<br/>
