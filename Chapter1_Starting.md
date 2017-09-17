@@ -69,7 +69,7 @@ c. 初始化缓冲区，在 ==viewDidLoad()==中添加<br/>
 let bufferSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
 vertexBuffer = device.makeBuffer(bytes: vertexData, length: bufferSize, options: [])
 ```
-<br/><br/>
+&ensp;
 #### 4. 创建一个顶点着色器
 着色器，简而言之，就是运行在GPU上的小程序，使用类似C++的==Metal Shading Language==编写，前面创建的顶点将作为着色器的输入。
 
@@ -95,8 +95,7 @@ line 1. 顶点着色器必须以关键字 ==vertex== 开头，函数必须返回
 line 2. 第一个参数是一个指向顶点位置数组的指针。==[[ ... ]]==语法用来声明用于指定附加信息，比如资源位置、着色器输入、内置变量的属性。这里使用==[[ buffer(0) ]]==来表示这个参数将位于传递给着色器的第一个缓冲区中。<br/>
 line 3. vertex_id参数表示，被顶点数组的指定顶点填充。<br/>
 line 4. 通过vertex_id在数组中查询顶点，然后将向量转为float4
-
-<br/><br/>
+&ensp;
 #### 5. 创建一个片元着色器
 片元着色器：屏幕上每个片元（像素）都会调用一次。着色器通过将顶点着色器的输出插入输入。<br/>
 片元着色器的作用是返回每个片元的最终颜色，本例中返回白色
@@ -113,8 +112,7 @@ fragment half4 basic_fragment() { // 1
 解释：<br/>
 line 1: 片元着色器必须以==fragment==开头，函数必须返回片元的颜色。<br/>
 line 2: 这里返回(1, , 1, 1)，表示白色
-<br/><br/>
-
+&ensp;
 #### 6. 创建一个渲染管线
 现在，已经创建了顶点和片元着色器，需要将它们（同其他配置数据）组合到一个叫 ==渲染管线（render pipeline）== 特殊的对象中。<br/>
 Metal比较酷的一点是，着色器都会预编译，渲染管线会在第一次设置完成后编译，使得所有事情非常高效。<br/>
@@ -143,7 +141,8 @@ renderPipelineState = try! device.makeRenderPipelineState(descriptor: pipelineSt
 1. 通过==MTLLibrary==可以通过名字来获取访问工程中的任何预编译的着色器。
 2. 配置渲染管线，指定要使用的着色器，以及像素格式。
 3. 将配置编译到管线状态来更高效的使用
-<br/><br/>
+
+&ensp;
 #### 7. 创建一个指令队列
 设置的最后一步需要创建一个==MTLCommandQueue==，这是一个告诉GPU依次执行的有序指令队列。<br/>
 具体代码：<br/>
