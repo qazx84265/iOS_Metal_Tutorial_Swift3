@@ -6,7 +6,7 @@
 准备工作：
 * Xcode 8 以上
 * iOS 8 以上的真机设备
-* Swift
+* Swift3.1
 
 
 ## Metal设置
@@ -46,7 +46,7 @@ metalLayer.framebufferOnly = true //
 metalLayer.frame = view.layer.frame
 view.layer.addSublayer(metalLayer)
 ```
-<br/><br/>
+&ensp;
 #### 3. 创建一个顶点缓冲区
 Metal中一切都是三角形，平面、3D图形都可以分解成一系列的三角形。<br/>
 Metal使用标准坐标系，意味着设备屏幕就是一个长宽高(x,y,z)为2*2*1，中心点为(0,0,0.5)的立方体。假设z=0，那么(-1,-1,0)为左下角，(1,1,0)为右上角。如图所示：
@@ -143,8 +143,7 @@ renderPipelineState = try! device.makeRenderPipelineState(descriptor: pipelineSt
 1. 通过==MTLLibrary==可以通过名字来获取访问工程中的任何预编译的着色器。
 2. 配置渲染管线，指定要使用的着色器，以及像素格式。
 3. 将配置编译到管线状态来更高效的使用
-
-<br/>
+<br/><br/>
 #### 7. 创建一个指令队列
 设置的最后一步需要创建一个==MTLCommandQueue==，这是一个告诉GPU依次执行的有序指令队列。<br/>
 具体代码：<br/>
